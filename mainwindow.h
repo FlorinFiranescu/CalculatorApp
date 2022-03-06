@@ -17,5 +17,13 @@ public:
 
 private:
     Ui::MainWindow *ui;
+
+private slots:
+    // this slots are going to be executed whenever
+    // a signal is going to be submited
+    void NumPressed();
+    void MathButtonPressed();
+    void EqualButton();
+    void ChangeNumberSign();
 };
 #endif // MAINWINDOW_H
