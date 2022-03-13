@@ -21,6 +21,12 @@ MainWindow::MainWindow(QWidget *parent)
         // connect the numButtons[i] with the callback NumPressed
         connect(numButtons[i], SIGNAL(released()), this, SLOT(NumPressed()));
     }
+    connect(ui->addButton, SIGNAL(released()), this, SLOT(MathButtonPressed()));
+    connect(ui->subtractButton, SIGNAL(released()), this, SLOT(MathButtonPressed()));
+    connect(ui->multiplyButton, SIGNAL(released()), this, SLOT(MathButtonPressed()));
+    connect(ui->divideButton, SIGNAL(released()), this, SLOT(MathButtonPressed()));
+    connect(ui->equalButton, SIGNAL(released()), this, SLOT(EqualButton()));
+    connect(ui->signChangeButton, SIGNAL(released()), this, SLOT(ChangeNumberSign()));
 }
 
 MainWindow::~MainWindow()
@@ -83,5 +89,16 @@ void MainWindow::EqualButton(){
 
 void MainWindow::ChangeNumberSign(){
     QString displayVal = ui->Display->text();
+    if(displayVal.length()){
+        if(displayVal.startsWith("-")){
+            // is negative
+            displayVal = displayVal.remove(0, 1);
+        } else{
+            // is positive
+            displayVal = "-" + displayVal;
+        }
+    }
+    double dblDisplayVal = displayVal.toDouble();
+    ui->Display->setText(QString::number(dblDisplayVal));
 }
 
